@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script>
+    $(document).ready(function() {
+        // $("#post").click(function() {
+        //     $.post("http://10.9.19.240/speed/collect", {
+        //             name: "Donald Duck",
+        //             city: "Duckburg"
+        //         },
+        //         function(data, status) {
+        //             alert("Data: " + data + "\nStatus: " + status);
+        //         }, "json");
+        // });
+        var t1 = 100,
+            t2 = 400,
+            t3 = 200,
+            t4 = 300,
+            t5 = 500;
+        $("#get").click(function() {
+            $.get("http://10.9.19.240/speed/collect", {
+                    key: "counter",
+                    uin: 123456,
+                    t1: t1,
+                    t2: t2,
+                    t3: t3,
+                    t4: t4,
+                    t5: t5
+                },
+                function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+        });
+        $("#get_hehavior").click(function() {
+            $.get("http://10.9.19.240/behavior/collect?", {
+                    uin: 123456,
+                    id:"onboarding",
+                    key:"ocr_upload",
+                    info: {
+                        isValue: 18
+                    }
+                },
+                function(data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+        });
+        setInterval(() => {
+            t1 = Math.floor(Math.random() * 150 + 1);
+            $("#get").trigger("click");
+        }, 240000);
+        setInterval(() => {
+            $("#get_hehavior").trigger("click");
+        }, 180000);
+    });
+    </script>
+    <style type="text/css">
+    button {
+        display: block;
+        height: 50px;
+        width: 100px;
+    }
+    
+    .result {
+        min-width: 50px;
+        min-height: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <button id="post">发送post请求</button>
+    <div id="post_result" class="result"></div>
+    <button id="get">发送get请求</button>
+    <div id="get_result" class="result"></div>
+    <button id="get_hehavior">发送hehavior get请求</button>
+    <div id="hehavior_result" class="result"></div>
+</body>
+
+</html>
